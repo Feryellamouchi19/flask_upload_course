@@ -8,6 +8,13 @@ UPLOAD_FOLDER = 'uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 # -----------------------------
+# Route racine pour tester
+# -----------------------------
+@app.route('/', methods=['GET'])
+def home():
+    return "API Flask Upload Course fonctionne ✅"
+
+# -----------------------------
 # API 1 : Upload PDF (POST)
 # -----------------------------
 @app.route('/upload_course', methods=['POST'])
@@ -27,7 +34,7 @@ def upload_course():
     return jsonify({
         "success": True,
         "message": "Cours uploadé avec succès",
-        "file_url": f"https://TON_URL_RENDER/uploads/{file.filename}"
+        "file_url": f"https://flask-upload-course-3.onrender.com/uploads/{file.filename}"
     })
 
 # -----------------------------
@@ -36,7 +43,7 @@ def upload_course():
 @app.route('/list_courses', methods=['GET'])
 def list_courses():
     files = os.listdir(UPLOAD_FOLDER)
-    file_urls = [f"https://TON_URL_RENDER/uploads/{f}" for f in files]
+    file_urls = [f"https://flask-upload-course-3.onrender.com/uploads/{f}" for f in files]
     return jsonify(file_urls)
 
 # -----------------------------
